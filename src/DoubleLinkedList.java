@@ -4,31 +4,36 @@ public class DoubleLinkedList {
 
    public void add(int value)
    {
-       DoubleLinkedInt[] tempList = new DoubleLinkedInt[listStart.length+1];
+       if(!contains(value)) {
+           DoubleLinkedInt[] tempList = new DoubleLinkedInt[listStart.length + 1];
 
-       int i;
+           int i;
 
-       for (i =0; i < listStart.length;i++) {
-            tempList[i] = listStart[i];
+           for (i = 0; i < listStart.length; i++) {
+               tempList[i] = listStart[i];
+           }
+           i++;
+           tempList[i] = new DoubleLinkedInt(value);
+
+           listStart = tempList;
        }
-       i++;
-       tempList[i] = new DoubleLinkedInt(value);
-
-       listStart=tempList;
+       System.out.println("value already exists in list");
    }
 
    public void remove(int value)
    {
-       DoubleLinkedInt[] tempList = new DoubleLinkedInt[listStart.length-1];
 
-        for(int i =0; i < listStart.length;i++)
-        {
-            if(listStart[i].getValue() != value){
-                tempList[i] = listStart[i];
-            }
-        }
+       if(contains(value)) {
+           DoubleLinkedInt[] tempList = new DoubleLinkedInt[listStart.length - 1];
 
-        listStart = tempList;
+           for (int i = 0; i < listStart.length; i++) {
+               if (listStart[i].getValue() != value) {
+                   tempList[i] = listStart[i];
+               }
+           }
+
+           listStart = tempList;
+       }
 
    }
 
@@ -45,6 +50,13 @@ public class DoubleLinkedList {
        }
 
        return contains;
+   }
+
+   public void printList()
+   {
+       for (int i = 0; i < listStart.length; i++) {
+           System.out.println(listStart[i].getValue());
+       }
    }
 
 }
